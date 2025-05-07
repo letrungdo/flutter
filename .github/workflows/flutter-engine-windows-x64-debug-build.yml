@@ -23,12 +23,12 @@ jobs:
           gclient sync -D
 
           cd engine/src
-          python .\flutter\tools\gn --unoptimized --runtime-mode=debug
-          ninja -C .\out\host_debug_unopt
+          python .\flutter\tools\gn --runtime-mode=debug
+          ninja -C .\out\host_debug
 
           # Check and compress files
           $outputPath = "${{ github.workspace }}\windows-x64-debug.zip"
-          $filesToCompress = Get-ChildItem -Path .\out\host_debug_unopt\flutter_windows.dll*
+          $filesToCompress = Get-ChildItem -Path .\out\host_debug\flutter_windows.dll*
           if ($filesToCompress) {
             Compress-Archive -Path $filesToCompress -DestinationPath $outputPath
           } else {
